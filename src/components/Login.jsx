@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd'
 
 const mySalt = '$2a$08$XX1aBKSkh0wJ0qsAITDqgO'
 
-export default function Login({ setUser, setReturningUser }) {
+export default function Login({ setToken, setReturningUser }) {
   function handleLogin({ email, password }) {
     const hashedPassword = bcrypt.hashSync(password, mySalt)
     fetch('https://auth-hash-api-bc.web.app/login', {
@@ -14,7 +14,7 @@ export default function Login({ setUser, setReturningUser }) {
       body: JSON.stringify({ email, password: hashedPassword })
     })
       .then(response => response.json())
-      .then(data => setUser(data.user || { email }))
+      .then(data => setToken(data.token))
       .catch(err => alert(err))
   }
   return (

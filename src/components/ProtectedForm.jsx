@@ -20,9 +20,19 @@ const validateMessages = {
   },
 }
 
-export default function ProtectedForm() {
+export default function ProtectedForm({ token }) {
   const onFinish = values => {
-    console.log(values)
+    fetch('https://auth-hash-api-bc.web.app/profile', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer: ${token}`
+      },
+      body: JSON.stringify(values.user)
+    })
+      .then(res => res.json())
+      .then(data => alert(data.message))
+      .catch(err => alert(err))
   }
   return (
     <>

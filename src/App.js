@@ -5,17 +5,17 @@ import ProtectedForm from './components/ProtectedForm'
 import 'antd/dist/antd.css'
 
 export default function App() {
-  const [user, setUser] = useState()
+  const [token, setToken] = useState()
   const [returningUser, setReturningUser] = useState(false)
-  if(!user) {
+  if(!token) {
     return (
       <>
         {!returningUser
-          ? <Signup setUser={setUser} setReturningUser={setReturningUser} />
-          : <Login setUser={setUser} setReturningUser={setReturningUser} />
+          ? <Signup setToken={setToken} setReturningUser={setReturningUser} />
+          : <Login setToken={setToken} setReturningUser={setReturningUser} />
         }
       </>
     )
   }
-  return <ProtectedForm />
+  return <ProtectedForm token={token} />
 }
